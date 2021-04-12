@@ -38,3 +38,5 @@ git pull origin master
 composer install
 chown -R www-data:www-data /var/www/html/
 source .env.dev
+
+echo "Penser à taper la commande certbot --apache"
