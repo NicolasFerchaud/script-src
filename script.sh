@@ -19,6 +19,11 @@ then
   ln -s /snap/bin/certbot /usr/bin/certbot
 fi
 
+APACHE_CHECK=$(ls /etc/apache2/sites-available/ | grep 000-default.conf)
+if [ -z "$APACHE_CHECK" ]
+then
+	touch /etc/apache2/sites-available/000-default.conf
+fi
 
 MD5_DEST=$(md5sum /etc/apache2/sites-available/000-default.conf | awk '{print $1}')
 MD5_SRC=$(md5sum 000-default.conf | awk '{print $1}')
@@ -34,6 +39,7 @@ then
 	cp 000-default.conf /etc/apache2/sites-available/000-default.conf
 	service apache2 restart
 fi
+
 
 
 mkdir -p /var/www/html
